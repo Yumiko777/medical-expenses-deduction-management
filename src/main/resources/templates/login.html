@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body class="text-center">
+<div class="alert alert-danger" role="alert" th:if="${param.error}">
+    ユーザIDとパスワードが一致しません。
+</div>
+<div class="alert alert-primary" role="alert" th:if="${param.logout}">
+    ログアウトしました。
+</div>
+<div class="alert alert-success" role="alert" th:if="${param.register}">
+    ユーザーを新規登録しました。
+</div>
+<main class="form-login">
+    <form th:action="@{/login}" method="post" class="col-md-4 mx-auto">
+
+        <h1 class="h3 my-3 fw-normal">ログイン</h1>
+
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" name="username" placeholder="name@example.com"
+                   required autofocus>
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
+                   required>
+            <label for="floatingPassword">Password</label>
+        </div>
+
+        <button class="btn btn-lg btn-primary" type="submit">ログイン</button>
+        <a th:href="@{/register}" class="btn btn-lg btn-outline-primary">新規登録はこちら</a>
+    </form>
+</main>
+</body>
+</html>

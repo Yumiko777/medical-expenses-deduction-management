@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+    <title>list</title>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light justify-content-end">
+        <h6 class="m-4 font-weight-normal" th:text="${username}"></h6>
+        <form method="post" th:action="@{/logout}" class="d-flex ">
+            <button class="btn btn-lg btn-outline-primary me-2" type="submit">Logout</button>
+        </form>
+    </nav>
+</header>
+<h3 class="text-center m-3 fw-normal">医療費明細</h3>
+<div class="container">
+    <div class="text-start">
+        <form action="delete" method="delete">
+            <button class="btn btn-success" type="button">追加</button>
+            <button class="btn btn-danger" type="submit">削除</button>
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>No</th>
+                    <th>受診日</th>
+                    <th>受診者</th>
+                    <th>支払先</th>
+                    <th>医療費の区分(診療・治療)</th>
+                    <th>支払額(円)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="medicalCostList, status: ${medicalCostList}" th:object="${medicalCostList}" class="align-middle">
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="check[]" value="0" id="checkbox1">
+                        </div>
+                    </td>
+                    <td th:text="${status.count}"></td>
+                    <td th:text="${#dates.format(medicalCostList.updateDate, 'yyyy/MM/dd')}"></td>
+                    <td th:text="*{person}"></td>
+                    <td th:text="*{hospital}"></td>
+                    <td th:text="*{classification}"></td>
+                    <td th:text="${#numbers.formatInteger(medicalCostList.amount, 3, 'COMMA')}"></td>
+                    <td>
+                        <a th:href="@{/medicalCostList/{id}(id=*{id})}" class="btn btn-primary">編集</a>
+                    </td>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

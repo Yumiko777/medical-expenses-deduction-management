@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.tymeleaf.org">
+<head>
+    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html" ; charset="UTF-8"/>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body class="text-center">
+<div class="alert alert-danger" role="alert" th:if="${param.error}">
+    既に登録されています。
+</div>
+
+<main class="form-group">
+    <form th:action="@{/register}" method="post" class="col-md-4 mx-auto">
+
+        <h1 class="h3 my-3 fw-normal">ユーザー新規登録</h1>
+
+        <div class="form-floating mb-3">
+            <input type="username" class="form-control" id="floatingInput" name="username" required autofocus>
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
+                   required>
+            <label for="floatingPassword">Password</label>
+        </div>
+
+        <button class="btn btn-lg btn-primary" type="submit">登録</button>
+        <a th:href="@{/}" class="btn btn-lg btn-outline-secondary" type="submit">キャンセル</a>
+    </form>
+</main>
+</body>
+</html>
